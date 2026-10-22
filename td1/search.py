@@ -169,3 +169,4 @@ def depth_first_search(
             frontier.append(next_state)
 
     raise RuntimeError(f"No path found from {start} to {goal}.")
+    

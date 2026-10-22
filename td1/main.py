@@ -63,6 +63,42 @@ def main() -> None:
 
     print(f"\nPath cost: {len(random_path) - 1}")
 
+    # Execute BFS and DFS so their results are displayed as well.
+    bfs_path = breadth_first_search(game_map, start, goal)
+    dfs_path = depth_first_search(game_map, start, goal)
+
+    print("\nBFS result:")
+    print(bfs_path)
+    print("BFS actions:")
+    print(path_to_actions(bfs_path))
+    print(f"BFS path cost: {len(bfs_path) - 1}")
+
+    print("\nDFS result:")
+    print(dfs_path)
+    print("DFS actions:")
+    print(path_to_actions(dfs_path))
+    print(f"DFS path cost: {len(dfs_path) - 1}")
+
+    # Save all search results in a simple text file next to this program.
+    with open("search_results.txt", "w", encoding="utf-8") as results_file:
+        results_file.write(f"Initial state: {start}\n")
+        results_file.write(f"Goal state: {goal}\n\n")
+
+        results_file.write("RANDOM PATH\n")
+        results_file.write(f"Path: {random_path}\n")
+        results_file.write(f"Actions: {path_to_actions(random_path)}\n")
+        results_file.write(f"Path cost: {len(random_path) - 1}\n\n")
+
+        results_file.write("BREADTH-FIRST SEARCH (BFS)\n")
+        results_file.write(f"Path: {bfs_path}\n")
+        results_file.write(f"Actions: {path_to_actions(bfs_path)}\n")
+        results_file.write(f"Path cost: {len(bfs_path) - 1}\n\n")
+
+        results_file.write("DEPTH-FIRST SEARCH (DFS)\n")
+        results_file.write(f"Path: {dfs_path}\n")
+        results_file.write(f"Actions: {path_to_actions(dfs_path)}\n")
+        results_file.write(f"Path cost: {len(dfs_path) - 1}\n")
+
     # Animate the trainer walking along the generated path.
     if INTERACTIVE:
         animation = visualize_path(
@@ -77,34 +113,5 @@ def main() -> None:
         # Keep a reference to the animation until the window is closed.
         _ = animation
         plt.show()
-'''
-    bfs_path = breadth_first_search(game_map, start, goal)
-
-    print("\nBFS example path:")
-    print(bfs_path)
-
-    print("\nCorresponding actions:")
-    print(path_to_actions(bfs_path))
-
-    print(f"\nPath cost: {len(bfs_path) - 1}")
-
-    if INTERACTIVE:
-        animation = visualize_path(game_map, start, goal, bfs_path)
-        _ = animation
-
-    dfs_path = depth_first_search(game_map, start, goal)
-
-    print("\nDFS example path:")
-    print(dfs_path)
-
-    print("\nCorresponding actions:")
-    print(path_to_actions(dfs_path))
-
-    print(f"\nPath cost: {len(dfs_path) - 1}")
-
-    if INTERACTIVE:
-        animation = visualize_path(game_map, start, goal, dfs_path)
-        _ = animation
-'''
 if __name__ == "__main__":
     main()
